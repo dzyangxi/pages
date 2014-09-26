@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>A标签测试</title>
+
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+
+	<script type="text/javascript">
+
+		window.onload = function  () {
+			var main = document.getElementById('main');
+			var tags = main.getElementsByTagName('a');
+			for(var i=0;i<tags.length;i++){
+				tags[i].onclick = function  () {
+					for(var j=0;j<tags.length;j++){
+						tags[j].style.background = "";
+						tags[j].style.color = "#CCC" ;
+					}
+					this.style.background = "red";
+					this.style.color = "white"
+				}
+
+				// tags[i].onmouseover = function () {
+				// 	this.style.background = "red";
+				// 	this.style.color = "white"
+				// }
+				// tags[i].onmouseout = function  () {
+				// 	this.style.background = "white";
+				// 	this.style.color = "#CCC";
+				// }
+			}
+		}
+	</script>
+	<body>
+		<div id="main">
+			<div class="box">
+				<ul>
+					<li><a href="#">测试一</a></li>
+					<li><a href="#">测试二</a></li>
+					<li><a href="#">测试三</a></li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

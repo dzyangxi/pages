@@ -1,0 +1,36 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+#main{
+	-moz-column-width:206px;
+	-webkit-column-width:206px;
+	-o-column-width:206px;
+	-ms-column-width:206px;
+}
+
+/*浏览器常用前缀
+	Firefox:-moz-column-width;
+	Safari:-webkit-column-width;
+	Opera:-o-column-width;
+	IE:-ms-column-width;
+*/
+
+.box{
+	padding: 15px 0 0 15px;
+}
+
+.pic{
+	padding: 15px;
+	border:1px solid #ccc;	
+	border-radius: 5px ;	/*边框圆角*/
+	box-shadow: 0 0 5px #ccc;	/*阴影*/
+	width: 175px;
+}
+
+.pic img{
+	display: block;
+	width: 175px;
+	height: auto;
+}

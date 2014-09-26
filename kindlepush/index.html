@@ -1,0 +1,369 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+	</head>
+	<style type="text/css">
+		*{
+			margin: 0px;
+			padding: 0px;
+
+			background: #F4F4F4;
+		}
+
+		input{
+			background: #FAFAFA;
+			border-radius: 3px;
+			line-height: 20px;
+			border: 1px solid #CCCCCC;
+		}
+
+		input:focus{
+			background: #FFFFFF;
+		}
+
+		a{
+			text-decoration: none;
+		}
+
+
+		#top{
+			/*解决IE7不兼容问题，在IE7下会向右偏移*/
+			/*text-align: left;*/
+		}
+
+		.header{
+			/*border: 1px solid #000;*/
+			width: 100%;
+			height: 50px;
+			position: fixed;
+			background: #FFFFFF;
+			overflow: hidden;
+			float: left;
+
+			/*阴影效果*/
+			-moz-box-shadow:0px 0px 4px;
+			-webkit-box-shadow:0px 0px 4px;
+			box-shadow:0px 0px 4px;
+
+			top: 0px;
+			z-index: 9999;
+		}
+
+		.menu_bar{
+			margin: 0 auto;
+			width: 1200px;
+			background: #FFFFFF;
+			height: 50px;
+			line-height: 50px;
+		}
+
+		.left{
+			background: #FFFFFF;
+			float: left;
+		}
+
+		.search_input{
+			background: #FAFAFA;
+			width: 165px;
+			height: 28px;
+			padding-left: 5px;
+			position: absolute;
+			top: 11px;
+			/*border: 1px solid #CCCCCC;*/
+			/*line-height: 20px;*/
+			/*border-radius: 3px;*/
+		}
+
+		.search_btn{
+			background: url(images/search_btn.gif) no-repeat;
+			width: 26px;
+			height: 28px;
+			position: absolute;
+			display: block;
+			margin-left: 145px;
+			top: 12px;
+			border: none;
+		}
+
+		#logo{
+			background: url(images/yeoman.png) no-repeat;
+			position: absolute;
+			display: block;
+			width: 74px;
+			height: 50%;
+			margin-left: 600px;
+			top: 11px;
+		}
+
+		.right{
+			background: #FFFFFF;
+			/*border: 1px solid red;*/
+			float: right;
+			height: 48px;
+			width: 120px;
+			margin-right: 10px;
+		}
+
+		.right input{
+			width: 50px;
+			height: 30px;
+		}
+
+
+		#mainbody{
+		/*	width: 1200px;
+			height: auto;
+			border: 1px solid red;
+			margin: 0 auto ;
+			padding-top: 60px;
+			position: relative;
+			z-index: -999;*/
+			height: auto;
+			position: relative;
+			margin: 0 auto;
+			/*z-index: -9999;*/
+		}
+
+		.box{
+			padding: 15px 0 0 15px;
+			float: left;
+		}
+
+		.pic{
+			padding: 15px;
+			border:1px solid #ccc;	
+			border-radius: 5px ;	/*边框圆角*/
+			box-shadow: 0 0 5px #ccc;	/*阴影*/
+		}
+
+		.pic img{
+			width: 200px;
+			height: auto;
+		}
+
+		#backTopBtn{
+			position:fixed;
+			width: 71px;
+			height: 72px;
+			left:50%; 
+		    margin-left:630px;
+		    bottom:30px; 
+			background: url(images/toTop.gif) no-repeat left top;
+			display: none;
+		}
+
+		#backTopBtn:hover{
+			background: url(images/toTop.gif) no-repeat right top;
+		}
+	</style>
+
+	<script type="text/javascript" src="js/waterfull.js"></script>
+	<script type="text/javascript">
+
+		window.onload = function  () {
+
+			/*加载瀑布流*/
+			waterfull('mainbody','box');
+
+
+			var backTopBtn = document.getElementById('backTopBtn');
+			var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+			var timer = null; /*定时器*/
+			var isTop = true;
+
+			window.onscroll = function(){
+				/*当图片滚动时，加载瀑布流图片*/
+				windowScroll();
+
+				var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+				if (scrollTop >= clientHeight) {
+					backTopBtn.style.display = 'block';
+				}else{
+					backTopBtn.style.display = 'none';
+				};
+
+				if (!isTop) {
+					clearInterval(timer);
+				};
+
+				isTop = false ;
+			}
+
+			backTopBtn.onclick = function(){
+
+				timer = setInterval(function(){
+					//获取滚动条的高度
+					var scrollTop = document.documentElement.scrollTop || document.body.scrollTop ;
+					
+					var ispeed = Math.floor(-scrollTop / 6);
+
+					document.documentElement.scrollTop = document.body.scrollTop =  (scrollTop+ispeed);
+
+					isTop = true;
+
+					if (scrollTop==0) {
+
+						//清除定时器
+						clearInterval(timer);
+					};
+				},30);
+			}	
+		}
+		</script>
+
+	<body>
+		<div id="page">
+			<div style="position: relative;top: 0px;left: 0px;right: 0px;height: 50px;"></div>
+			<div id="top">
+				<div class="header">
+					<div class="menu_bar">
+						<div class="left">
+							<input class="search_input" type="text" name="search" placeholder="搜索你喜欢的"/>
+							<a class="search_btn" href=""></a>
+						</div>
+						<!-- 中间的图标 -->
+						<a id="logo" href="#"></a>
+						<div class="right">
+							<input class="login_btn" type="button" value="登录"/>
+							<input class="register_btn" type="button" value="注册">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="mainbody" style="border:3px solid red;">
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_00.jpg" />
+					</div>
+				</div>
+
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_01.jpg" />
+					</div>
+				</div>
+
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_02.jpg" />
+					</div>
+				</div>
+
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_03.jpg" />
+					</div>
+				</div>
+
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_04.jpg" />
+					</div>
+				</div>
+
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_05.jpg" />
+					</div>
+				</div>
+
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_06.jpg" />
+					</div>
+				</div>
+
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_07.jpg" />
+					</div>
+				</div>
+
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_08.jpg" />
+					</div>
+				</div>
+
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_09.jpg" />
+					</div>
+				</div>
+
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_010.jpg" />
+					</div>
+				</div>
+
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_011.jpg" />
+					</div>
+				</div>
+
+
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_012.jpg" />
+					</div>
+				</div>
+
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_013.jpg" />
+					</div>
+				</div>
+
+
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_014.jpg" />
+					</div>
+				</div>
+
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_015.jpg" />
+					</div>
+				</div>
+
+
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_016.jpg" />
+					</div>
+				</div>
+
+
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_017.jpg" />
+					</div>
+				</div>
+
+
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_018.jpg" />
+					</div>
+				</div>
+
+
+				<div class="box">
+					<div class="pic">
+						<img src="images/books/P_019.jpg" />
+					</div>
+				</div>
+			</div>
+
+			<a href="javascript:;" id="backTopBtn" title="返回到顶部"></a>
+
+			<div id="footer"></div>
+		</div>
+	</body>
+</html>
